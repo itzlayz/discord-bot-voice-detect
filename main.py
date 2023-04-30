@@ -6,13 +6,13 @@ from pydub import AudioSegment
 from disnake.ext import commands
 from config import token, prefix
 
-client = commands.Bot(command_prefix=prefix, intents=disnake.Intents.all())
+bot = commands.Bot(command_prefix=prefix, intents=disnake.Intents.all())
 
-@client.event
+@bot.event
 async def on_ready():
     print(f'Bot connected as {client.user}')
 
-@client.command()
+@bot.command()
 async def detect(ctx):
     attachment = ctx.message.reference.resolved.attachments[0].url
     response = requests.get(attachment)
@@ -38,4 +38,4 @@ async def detect(ctx):
     except sr.UnknownValueError:
         await ctx.reply('Text not recognized')
 
-client.run(token)
+bot.run(token)
