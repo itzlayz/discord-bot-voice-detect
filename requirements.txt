@@ -1,0 +1,4 @@
+disnake
+requests
+SpeechRecognition
+pydub

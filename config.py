@@ -1,0 +1,2 @@
+token = 'YOUR_TOKEN_HERE'
+prefix = 'YOUR_PREFIX_HERE'
