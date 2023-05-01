@@ -10,7 +10,7 @@ bot = commands.Bot(command_prefix=prefix, intents=disnake.Intents.all())
 
 @bot.event
 async def on_ready():
-    print(f'Bot connected as {client.user}')
+    print(f'Bot connected as {bot.user}')
 
 @bot.command()
 async def detect(ctx):
