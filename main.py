@@ -13,7 +13,7 @@ bot = commands.Bot(command_prefix=prefix, intents=disnake.Intents.all())
 async def on_ready():
     print(f'Bot connected as {bot.user}')
     
-@client.message_command()
+@bot.message_command()
 async def detectVoiceText(inter: disnake.Interaction, msg: disnake.message.Message):
     if not msg.attachments:
         return await inter.response.send_message('There is no voice message', ephemeral=True)
