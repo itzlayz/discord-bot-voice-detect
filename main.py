@@ -15,13 +15,12 @@ async def on_ready():
     
 @bot.message_command()
 async def detectVoiceText(inter: disnake.Interaction, msg: disnake.message.Message):
-    if not msg.attachments:
+    if not msg.attachments or str(msg.attachments[0].url).endswith('ogg'):
+        return await ctx.send('There is no voice message')
         return await inter.response.send_message('There is no voice message', ephemeral=True)
     attachment = msg.attachments[0].url
     response = requests.get(attachment)
     tm = str(round(time()))
-
-    print(type(inter), type(msg))
     
     with open(f'{tm}.ogg', 'wb') as f:
         f.write(response.content)
@@ -47,8 +46,9 @@ async def detectVoiceText(inter: disnake.Interaction, msg: disnake.message.Messa
 
 @bot.command()
 async def detect(ctx):
-    if not ctx.message.reference:
-        return await ctx.send('There is not a voice message')
+    if not ctx.message.reference or\
+          not str(ctx.message.reference.resolved.attachments[0].url).endswith('ogg'):
+        return await ctx.send('There is no voice message')
     attachment = ctx.message.reference.resolved.attachments[0].url
     response = requests.get(attachment)
     name = ctx.author.name
