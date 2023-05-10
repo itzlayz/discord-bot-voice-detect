@@ -16,7 +16,6 @@ async def on_ready():
 @bot.message_command()
 async def detectVoiceText(inter: disnake.Interaction, msg: disnake.message.Message):
     if not msg.attachments or str(msg.attachments[0].url).endswith('ogg'):
-        return await ctx.send('There is no voice message')
         return await inter.response.send_message('There is no voice message', ephemeral=True)
     attachment = msg.attachments[0].url
     response = requests.get(attachment)
